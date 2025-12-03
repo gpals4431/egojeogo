@@ -24,10 +24,10 @@ export function Layout({ children }: LayoutProps) {
             ═══════════════════════════════════
           </p>
           <p className="text-[10px]">
-            ★ PIXEL HOME © 2024 ★
+            🎮 PIXEL HOME © 2024 🎮
           </p>
           <p className="text-[8px] mt-2 text-primary-foreground/70">
-            Made with ♥ and lots of pixels
+            Made with 💚 and lots of pixels ✨
           </p>
           <p className="text-[10px] mt-2">
             ═══════════════════════════════════
