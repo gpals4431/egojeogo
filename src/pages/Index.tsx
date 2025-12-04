@@ -13,7 +13,7 @@ const Index = () => {
             🌟 WELCOME TO MY PIXEL WORLD 🌟
           </h1>
           <p className="text-[10px] leading-relaxed max-w-md mx-auto">
-            안녕하세요! 👋 이곳은 나만의 픽셀 공간입니다.<br />
+            안녕하세요! 이곳은 이거저거 올리는 공간입니다.<br />
             💻 개발, 🗾 일본어, 📈 경제, 🍱 일상을 기록합니다.
           </p>
           <div className="mt-4 text-[8px] text-primary-foreground/70">
@@ -60,10 +60,10 @@ const Index = () => {
               <div className="text-3xl mb-2 group-hover:animate-pixel-bounce">
                 {item.icon}
               </div>
-              <div className="text-[10px] uppercase tracking-wider mb-1">
+              <div className="text-[12px] uppercase tracking-wider mb-1">
                 {item.label}
               </div>
-              <div className="text-[8px] text-muted-foreground">
+              <div className="text-[10px] text-muted-foreground">
                 {item.desc}
               </div>
             </a>
@@ -75,7 +75,7 @@ const Index = () => {
       <section className="pixel-border bg-card p-4">
         <div className="flex flex-wrap items-center justify-between gap-4 text-[10px]">
           <div className="flex items-center gap-4">
-            <span className="text-primary">🟢</span>
+            <span className="text-primary animate-blink">🟢</span>
             <span>STATUS: ONLINE ✨</span>
           </div>
           <div className="flex items-center gap-4">

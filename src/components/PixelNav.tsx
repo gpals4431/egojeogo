@@ -21,7 +21,7 @@ export function PixelNav() {
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center justify-between py-4">
           <Link to="/" className="text-sm pixel-text-shadow hover:animate-pixel-bounce flex items-center gap-2">
-            <span>🎮</span> MY PIXEL HOME <span>🎮</span>
+            <span>🍀</span> EGOJEOGO <span>🍀</span>
           </Link>
           <ul className="flex gap-2">
             {navItems.map((item) => (
@@ -46,7 +46,7 @@ export function PixelNav() {
         <div className="md:hidden">
           <div className="flex items-center justify-between py-4">
             <Link to="/" className="text-xs pixel-text-shadow flex items-center gap-1">
-              <span>🎮</span> PIXEL HOME
+              <span>🍀</span> EGOJEOGO
             </Link>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}

@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import tailwindcssAnimate from "tailwindcss-animate";
 
 export default {
   darkMode: ["class"],
@@ -7,7 +8,12 @@ export default {
   theme: {
     container: {
       center: true,
-      padding: "2rem",
+      padding: {
+        DEFAULT: "1.5rem",
+        sm: "2rem",
+        lg: "2.5rem",
+        xl: "3rem",
+      },
       screens: {
         "2xl": "1400px",
       },
@@ -15,6 +21,7 @@ export default {
     extend: {
       fontFamily: {
         pixel: ['"Press Start 2P"', 'cursive'],
+        'thin-rounded': ['ThinRounded', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -88,6 +95,10 @@ export default {
           "0%, 100%": { transform: "translateY(0)" },
           "50%": { transform: "translateY(-8px)" },
         },
+        "blink": {
+          "0%, 50%": { opacity: "1" },
+          "51%, 100%": { opacity: "0.3" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -95,8 +106,9 @@ export default {
         "pixel-bounce": "pixel-bounce 0.5s ease-in-out infinite",
         "pixel-shake": "pixel-shake 0.3s ease-in-out",
         "float": "float 3s ease-in-out infinite",
+        "blink": "blink 1.5s ease-in-out infinite",
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [tailwindcssAnimate],
 } satisfies Config;

@@ -18,7 +18,7 @@ export function PixelCard({ title, children, className, variant = "default" }: P
   return (
     <div className={cn("pixel-card p-4", variantClasses[variant], className)}>
       <div className="border-b-4 border-border pb-2 mb-4">
-        <h3 className="text-xs uppercase tracking-wider pixel-text-shadow">
+        <h3 className="text-sm uppercase tracking-wider">
           {">"} {title}
         </h3>
       </div>
