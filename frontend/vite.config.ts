@@ -7,11 +7,11 @@ import { componentTagger } from "lovable-tagger";
 export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
-    port: 8030,
+    port: 3030,
     proxy: {
       // Spring Boot API 프록시 설정
       "/api": {
-        target: "http://localhost:8080", // Spring Boot 기본 포트
+        target: "http://localhost:8030", // Spring Boot 기본 포트
         changeOrigin: true,
         secure: false,
       },

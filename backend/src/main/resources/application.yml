@@ -1,0 +1,48 @@
+server:
+  port: 8030
+  servlet:
+    context-path: /api
+
+spring:
+  application:
+    name: backend
+
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: sa
+
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+      settings:
+        web-allow-others: true
+
+  jpa:
+    open-in-view: false
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+  security:
+    user:
+      name: admin
+      password: admin123
+      roles: ADMIN
+
+logging:
+  level:
+    root: INFO
+    org.hibernate.SQL: DEBUG
+    org.hibernate.orm.jdbc.bind: TRACE
+    com.egojeogo: DEBUG
+
+
+seoul:
+  subway:
+    api:
+      key: 1234567890
+      url: https://api.seoul.go.kr/api/subway/v1/getStationArrivalInfo/0/5/
