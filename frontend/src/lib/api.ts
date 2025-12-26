@@ -13,6 +13,7 @@ export class ApiClient {
     options: RequestInit = {}
   ): Promise<T> {
     const url = `${this.baseURL}${endpoint}`;
+    console.log('API 요청:', options.method || 'GET', url, options.body);
     
     const config: RequestInit = {
       headers: {
@@ -24,12 +25,21 @@ export class ApiClient {
 
     try {
       const response = await fetch(url, config);
+      console.log('API 응답:', response.status, response.statusText, url);
       
       if (!response.ok) {
+        const errorText = await response.text();
+        console.error('API 에러 응답:', errorText);
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-      return await response.json();
+      // 응답이 비어있을 수 있으므로 체크
+      const contentType = response.headers.get('content-type');
+      if (contentType && contentType.includes('application/json')) {
+        return await response.json();
+      } else {
+        return null as T;
+      }
     } catch (error) {
       console.error('API request failed:', error);
       throw error;

@@ -1,6 +1,8 @@
 package com.egojeogo.subway.application.port.in;
 
 import com.egojeogo.subway.domain.model.FavoriteStation;
+import com.egojeogo.subway.adapter.in.web.dto.response.SubwayArrivalResponse;
+import java.util.List;
 /**
  * port/in 이 시스템이 제공하는 기능 목록
  * port는 외부에서 접근할때의 중간 역할 
@@ -11,5 +13,5 @@ import com.egojeogo.subway.domain.model.FavoriteStation;
 public interface FavoriteStationUseCase {
     void registerFavoriteStation(FavoriteStation favoriteStation);
     void updateFavoriteStation(FavoriteStation favoriteStation);
-    FavoriteStation getFavoriteStation();
+    List<SubwayArrivalResponse> getFavoriteStation();
 }

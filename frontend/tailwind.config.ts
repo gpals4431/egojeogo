@@ -99,6 +99,18 @@ export default {
           "0%, 50%": { opacity: "1" },
           "51%, 100%": { opacity: "0.3" },
         },
+        "train-move": {
+          "0%, 100%": { transform: "translateX(0)" },
+          "50%": { transform: "translateX(4px)" },
+        },
+        "train-arrive": {
+          "0%": { transform: "translateX(-10px) translateY(-50%)", opacity: "0.5" },
+          "100%": { transform: "translateX(0) translateY(-50%)", opacity: "1" },
+        },
+        "glow-pulse": {
+          "0%, 100%": { boxShadow: "0 0 5px currentColor, 0 0 10px currentColor" },
+          "50%": { boxShadow: "0 0 10px currentColor, 0 0 20px currentColor, 0 0 30px currentColor" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -107,6 +119,9 @@ export default {
         "pixel-shake": "pixel-shake 0.3s ease-in-out",
         "float": "float 3s ease-in-out infinite",
         "blink": "blink 1.5s ease-in-out infinite",
+        "train-move": "train-move 1.5s ease-in-out infinite",
+        "train-arrive": "train-arrive 0.5s ease-out",
+        "glow-pulse": "glow-pulse 1.5s ease-in-out infinite",
       },
     },
   },

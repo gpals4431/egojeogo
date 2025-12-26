@@ -4,11 +4,15 @@ server:
     context-path: /api
 
 spring:
+  output:
+    ansi:
+      enabled: always
+
   application:
     name: backend
 
   datasource:
-    url: jdbc:h2:mem:testdb
+    url: jdbc:h2:file:./data/testdb
     driver-class-name: org.h2.Driver
     username: sa
     password: sa
@@ -23,6 +27,8 @@ spring:
   jpa:
     open-in-view: false
     show-sql: true
+    hibernate:
+      ddl-auto: update    # create → update (테이블 재생성 방지)
     properties:
       hibernate:
         format_sql: true
@@ -39,10 +45,12 @@ logging:
     org.hibernate.SQL: DEBUG
     org.hibernate.orm.jdbc.bind: TRACE
     com.egojeogo: DEBUG
+  charset:
+    console: UTF-8
 
 
 seoul:
   subway:
     api:
-      key: 1234567890
-      url: https://api.seoul.go.kr/api/subway/v1/getStationArrivalInfo/0/5/
+      key: 746c7a476d7765673939446d64526b
+      url: http://swopenAPI.seoul.go.kr/api/subway

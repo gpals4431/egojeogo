@@ -21,6 +21,12 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'jakarta.validation:jakarta.validation-api'
+    implementation 'org.hibernate.validator:hibernate-validator'
+    
+    // XML 파싱용
+    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.15.0'
 
     runtimeOnly 'com.h2database:h2'
 
@@ -32,4 +38,12 @@ dependencies {
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+bootRun {
+    jvmArgs = ['-Dfile.encoding=UTF-8', '-Dconsole.encoding=UTF-8']
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
 }
