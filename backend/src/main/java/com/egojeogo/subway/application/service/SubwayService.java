@@ -22,7 +22,7 @@ public class SubwayService implements FavoriteStationUseCase{
     private final SubwayArrivalPort subwayArrivalPort;
     @Override
     public void registerFavoriteStation(FavoriteStation favoriteStation) {
-        log.info("관심역 등록: {}", favoriteStation);
+        log.info("register favorite station: {}", favoriteStation);
 
         repository.save(favoriteStation);
     }
@@ -45,10 +45,10 @@ public class SubwayService implements FavoriteStationUseCase{
             for (FavoriteStation favoriteStation : favoriteStations) {
                 List<SubwayArrival> subwayRealTimeArrival = subwayArrivalPort.getSubwayRealTimeArrival(favoriteStation);
                 log.info("get subway real time arrival:{}", Arrays.toString(subwayRealTimeArrival.toArray()));
-                subwayArrivalResponses.addAll(subwayRealTimeArrival.stream()
-                    .map(SubwayArrivalResponse::from)
-                    .toList());
-                }
+            subwayArrivalResponses.addAll(subwayRealTimeArrival.stream()
+                .map(SubwayArrivalResponse::from)
+                .toList());
+            }
             return subwayArrivalResponses;
                 
         } catch (Exception e) {

@@ -41,6 +41,7 @@ interface TrainGroup {
   lineName: string;
   direction: string;      // 외선, 내선, 상행, 하행
   destination: string;    // 종착역 (성수행 등)
+  stationName: string;   // 해당 그룹의 역 이름
   trains: SubwayArrivalInfo[];
 }
 
@@ -137,6 +138,7 @@ export function SubwayWidget() {
           lineName: train.lineName,
           direction: train.updnLine,
           destination: train.bstatnNm,
+          stationName: train.statnNm,  // 각 그룹의 실제 역 이름
           trains: [],
         });
       }
@@ -217,7 +219,7 @@ export function SubwayWidget() {
                       <span className="text-primary">⬆️ 상행 · 외선</span>
                     </div>
                     {upGroups.map((group, idx) => (
-                      <TrainTrackGroup key={`up-${idx}`} group={group} stationName={stationName} />
+                      <TrainTrackGroup key={`up-${idx}`} group={group} />
                     ))}
                   </div>
                 )}
@@ -234,7 +236,7 @@ export function SubwayWidget() {
                       <span className="text-accent">⬇️ 하행 · 내선</span>
                     </div>
                     {downGroups.map((group, idx) => (
-                      <TrainTrackGroup key={`down-${idx}`} group={group} stationName={stationName} />
+                      <TrainTrackGroup key={`down-${idx}`} group={group} />
                     ))}
                   </div>
                 )}
@@ -422,13 +424,12 @@ function FavoriteStationModal({
 
 // 통합 트랙 컴포넌트 (같은 방향의 모든 열차를 하나의 트랙에 표시)
 function TrainTrackGroup({ 
-  group, 
-  stationName 
+  group
 }: { 
   group: TrainGroup;
-  stationName: string;
 }) {
   const lineColor = getLineColor(group.lineName);
+  const stationName = group.stationName;  // 그룹의 실제 역 이름 사용
   
   // 역 목록 생성 (현재역 + 열차들이 위치한 역들)
   const stations = useMemo(() => {
