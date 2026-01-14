@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import java.time.LocalDateTime;
 import com.egojeogo.subway.domain.model.FavoriteStation;
+import org.springframework.lang.NonNull;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.NoArgsConstructor;
@@ -34,6 +35,7 @@ public class FavoriteStationEntity {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
+    @NonNull
     public static FavoriteStationEntity from(FavoriteStation domain) {
         FavoriteStationEntity e = new FavoriteStationEntity();
         e.userId = "me"; // 임시 사용자 아이디

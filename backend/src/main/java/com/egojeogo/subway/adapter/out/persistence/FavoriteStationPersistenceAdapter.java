@@ -1,24 +1,21 @@
 package com.egojeogo.subway.adapter.out.persistence;
 
 import java.util.List;
-import java.util.ArrayList;
 import com.egojeogo.subway.domain.model.FavoriteStation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import com.egojeogo.subway.application.port.out.FavoriteStationRepository;
 import com.egojeogo.subway.adapter.out.persistence.entity.FavoriteStationEntity;
-
+import com.egojeogo.subway.adapter.out.persistence.mapper.FavoriteStationMapper;
 //jpa, entity, mapper 사용 
 @Repository
 @RequiredArgsConstructor
-public class FavoriteStationJpaRepository implements FavoriteStationRepository {
+public class FavoriteStationPersistenceAdapter implements FavoriteStationRepository {
     private final SpringDataFavoriteStationRepository jpaRepository;
-
+    private final FavoriteStationMapper mapper;
    @Override
     public void save(FavoriteStation favoriteStation) {
-        FavoriteStationEntity entity =
-            FavoriteStationEntity.from(favoriteStation);
-
+        FavoriteStationEntity entity = mapper.toEntity(favoriteStation);
         jpaRepository.save(entity);
     }
 
@@ -37,9 +34,7 @@ public class FavoriteStationJpaRepository implements FavoriteStationRepository {
 
     @Override
     public void update(FavoriteStation favoriteStation) {
-        FavoriteStationEntity entity =
-            FavoriteStationEntity.from(favoriteStation);
-
+        FavoriteStationEntity entity = mapper.toEntity(favoriteStation);
         jpaRepository.save(entity);
     }
     
