@@ -1,0 +1,29 @@
+// Subway Service - 독립 실행 가능한 마이크로서비스
+
+plugins {
+    id 'org.springframework.boot'
+}
+
+dependencies {
+    // Common 모듈 의존성
+    implementation project(':common')
+    
+    // Spring Boot Starters
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    
+    // XML 파싱용 (서울시 지하철 API가 XML 응답)
+    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.15.0'
+    
+    // Database
+    runtimeOnly 'com.h2database:h2'
+    
+    // Test
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+bootRun {
+    jvmArgs = ['-Dfile.encoding=UTF-8', '-Dconsole.encoding=UTF-8']
+}

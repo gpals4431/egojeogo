@@ -91,11 +91,26 @@ const isTrainMoving = (arvlMsg2: string): boolean => {
   return arvlMsg2.includes("출발") || arvlMsg2.includes("분") || arvlMsg2.includes("번째");
 };
 
-// 호선 목록
+// 호선 목록 (표시용과 전송용)
 const SUBWAY_LINES = [
-  "1호선", "2호선", "3호선", "4호선", "5호선", "6호선", "7호선", "8호선", "9호선",
-  "경의중앙선", "공항철도", "경춘선", "수인분당선", "신분당선",
-  "우이신설선", "서해선", "김포골드라인", "신림선"
+  { value: "1", label: "1호선" },
+  { value: "2", label: "2호선" },
+  { value: "3", label: "3호선" },
+  { value: "4", label: "4호선" },
+  { value: "5", label: "5호선" },
+  { value: "6", label: "6호선" },
+  { value: "7", label: "7호선" },
+  { value: "8", label: "8호선" },
+  { value: "9", label: "9호선" },
+  { value: "경의중앙선", label: "경의중앙선" },
+  { value: "공항철도", label: "공항철도" },
+  { value: "경춘선", label: "경춘선" },
+  { value: "수인분당선", label: "수인분당선" },
+  { value: "신분당선", label: "신분당선" },
+  { value: "우이신설선", label: "우이신설선" },
+  { value: "서해선", label: "서해선" },
+  { value: "김포골드라인", label: "김포골드라인" },
+  { value: "신림선", label: "신림선" }
 ];
 
 // 방향 목록
@@ -368,8 +383,8 @@ function FavoriteStationModal({
             </SelectTrigger>
             <SelectContent>
               {SUBWAY_LINES.map((line) => (
-                <SelectItem key={line} value={line}>
-                  {line}
+                <SelectItem key={line.value} value={line.value}>
+                  {line.label}
                 </SelectItem>
               ))}
             </SelectContent>

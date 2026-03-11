@@ -1,0 +1,38 @@
+# Git
+.git
+.gitignore
+
+# IDE
+.idea
+.vscode
+*.iml
+
+# Build outputs
+**/build/
+**/bin/
+**/out/
+**/target/
+
+# Gradle
+.gradle
+**/gradle-wrapper.jar
+
+# Data
+**/data/
+*.db
+*.mv.db
+*.trace.db
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Node modules (frontend)
+node_modules/
+frontend/
+
+# Backend legacy
+backend/

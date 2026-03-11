@@ -1,0 +1,22 @@
+// Common 모듈 - 라이브러리로 사용 (독립 실행 불가)
+// Spring Boot Application이 아니므로 bootJar 비활성화
+
+plugins {
+    id 'java-library'
+}
+
+// Spring Boot Application이 아니므로 jar 생성만 필요
+// bootJar를 비활성화하고 일반 jar만 생성
+tasks.named('jar') {
+    enabled = true
+}
+
+dependencies {
+    // Spring Web (Exception Handler 등에서 사용)
+    api 'org.springframework.boot:spring-boot-starter-web'
+    
+    // Validation
+    api 'org.springframework.boot:spring-boot-starter-validation'
+    api 'jakarta.validation:jakarta.validation-api'
+    api 'org.hibernate.validator:hibernate-validator'
+}

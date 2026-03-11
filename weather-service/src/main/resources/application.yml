@@ -1,0 +1,49 @@
+server:
+  port: 8082
+  servlet:
+    context-path: /
+
+spring:
+  application:
+    name: weather-service
+
+  output:
+    ansi:
+      enabled: always
+
+  datasource:
+    url: jdbc:h2:file:./data/weather-db
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: sa
+
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+      settings:
+        web-allow-others: true
+
+  jpa:
+    open-in-view: false
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+
+logging:
+  level:
+    root: INFO
+    org.hibernate.SQL: DEBUG
+    org.hibernate.orm.jdbc.bind: TRACE
+    com.egojeogo: DEBUG
+  charset:
+    console: UTF-8
+
+# 기상청 단기예보 API
+weather:
+  api:
+    key: 76cb48e3707823fbd92b3c9cd72a015dbe5fbc931ee9d305a9a3cd00b81d01fe
+    url: https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?

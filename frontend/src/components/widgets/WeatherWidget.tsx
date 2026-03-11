@@ -28,15 +28,15 @@ interface WeatherResponse {
 
 // 날씨 상태에 따른 이모지 매핑
 const getWeatherEmoji = (skyStatus: string, rainStatus: string, isNight: boolean): string => {
-  if (rainStatus && rainStatus !== "없음") {
+  if (rainStatus && rainStatus !== "강수 없음") {
     if (rainStatus.includes("비")) return "🌧️";
     if (rainStatus.includes("눈")) return "❄️";
     return "🌦️";
   }
   
-  if (skyStatus) {
+  else if (skyStatus) {
     if (skyStatus.includes("맑음")) return isNight ? "🌙" : "☀️";
-    if (skyStatus.includes("구름많음")) return isNight ? "☁️" : "⛅";
+    if (skyStatus.includes("구름 많음")) return isNight ? "☁️" : "⛅";
     if (skyStatus.includes("흐림")) return "☁️";
   }
   
@@ -45,7 +45,7 @@ const getWeatherEmoji = (skyStatus: string, rainStatus: string, isNight: boolean
 
 // 날씨 상태 설명
 const getWeatherDescription = (skyStatus: string, rainStatus: string): string => {
-  if (rainStatus && rainStatus !== "없음") {
+  if (rainStatus && rainStatus !== "강수 없음") {
     return rainStatus;
   }
   return skyStatus || "날씨 정보 없음";
@@ -279,34 +279,48 @@ export function WeatherWidget() {
                     <div className="text-[9px] font-bold mb-2 text-accent">
                       📅 {dateStr}
                     </div>
-                    <div className="space-y-1 max-h-32 overflow-y-auto">
-                      {weathers.map((weather, idx) => {
-                        const hour = parseInt(weather.fcstTime.slice(0, 2));
-                        const timeStr = `${hour.toString().padStart(2, "0")}:00`;
-                        
-                        return (
-                          <div
-                            key={`${weather.fcstDate}-${weather.fcstTime}-${idx}`}
-                            className="flex items-center justify-between text-[8px] py-1 px-2 hover:bg-muted/50 transition-colors"
-                          >
-                            <div className="flex items-center gap-2">
-                              <span className="text-muted-foreground w-10">{timeStr}</span>
-                              <span className="text-lg">
+                    <div className="overflow-x-auto">
+                      <div className="flex gap-3 pb-2">
+                        {weathers.map((weather, idx) => {
+                          const hour = parseInt(weather.fcstTime.slice(0, 2));
+                          const timeStr = `${hour.toString().padStart(2, "0")}:00`;
+                          
+                          return (
+                            <div
+                              key={`${weather.fcstDate}-${weather.fcstTime}-${idx}`}
+                              className="flex-shrink-0 w-20 text-center p-2 border border-border rounded hover:bg-muted/50 transition-colors"
+                            >
+                              {/* 날씨 아이콘 */}
+                              <div className="text-3xl mb-1">
                                 {getWeatherEmoji(weather.skyStatus, weather.rainStatus, weather.isNight)}
-                              </span>
-                            </div>
-                            <div className="flex items-center gap-3">
-                              <span className="font-bold">{Math.round(weather.temperature)}°</span>
-                              <span className="text-muted-foreground text-[7px]">
+                              </div>
+
+                              {/* 온도 */}
+                              <div className="text-sm font-bold text-accent">
+                                {Math.round(weather.temperature)}°
+                              </div>
+                              
+                              {/* 상태 */}
+                              <div className="text-[7px] text-muted-foreground mb-2 min-h-[20px] leading-tight">
                                 {getWeatherDescription(weather.skyStatus, weather.rainStatus)}
-                              </span>
+                              </div>
+                              
+                              {/* 시간 */}
+                              <div className="text-[8px] font-semibold text-foreground my-1">
+                                {timeStr}
+                              </div>
+                              
+                              
+                              {/* 강수량 (있는 경우) */}
                               {weather.rainAmount > 0 && (
-                                <span className="text-[7px] text-accent">💧 {weather.rainAmount}mm</span>
+                                <div className="text-[7px] text-blue-500 mt-1">
+                                  💧 {weather.rainAmount}mm
+                                </div>
                               )}
                             </div>
-                          </div>
-                        );
-                      })}
+                          );
+                        })}
+                      </div>
                     </div>
                   </div>
                 );

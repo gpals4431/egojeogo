@@ -9,11 +9,23 @@ export default defineConfig(({ mode }) => ({
     host: "::",
     port: 3030,
     proxy: {
-      // Spring Boot API 프록시 설정
+      // MSA API Gateway 프록시 설정
       "/api": {
-        target: "http://localhost:8030", // Spring Boot 기본 포트
+        target: "http://localhost:8080", // API Gateway
         changeOrigin: true,
         secure: false,
+        ws: true,
+        configure: (proxy, options) => {
+          proxy.on('error', (err, req, res) => {
+            console.log('proxy error', err);
+          });
+          proxy.on('proxyReq', (proxyReq, req, res) => {
+            console.log('Sending Request:', req.method, req.url, '→', options.target + req.url);
+          });
+          proxy.on('proxyRes', (proxyRes, req, res) => {
+            console.log('Received Response:', proxyRes.statusCode, req.url);
+          });
+        },
       },
     },
   },

@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+  # API Gateway
+  api-gateway:
+    build:
+      context: .
+      dockerfile: api-gateway/Dockerfile
+    container_name: egojeogo-api-gateway
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - subway-service
+      - weather-service
+    networks:
+      - egojeogo-network
+
+  # Subway Service
+  subway-service:
+    build:
+      context: .
+      dockerfile: subway-service/Dockerfile
+    container_name: egojeogo-subway-service
+    ports:
+      - "8081:8081"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    volumes:
+      - subway-data:/app/data
+    networks:
+      - egojeogo-network
+
+  # Weather Service
+  weather-service:
+    build:
+      context: .
+      dockerfile: weather-service/Dockerfile
+    container_name: egojeogo-weather-service
+    ports:
+      - "8082:8082"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    volumes:
+      - weather-data:/app/data
+    networks:
+      - egojeogo-network
+
+networks:
+  egojeogo-network:
+    driver: bridge
+
+volumes:
+  subway-data:
+  weather-data:

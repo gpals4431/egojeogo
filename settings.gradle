@@ -1,0 +1,11 @@
+rootProject.name = 'egojeogo'
+
+// 공통 모듈
+include 'common'
+
+// 마이크로서비스들
+include 'subway-service'
+include 'weather-service'
+include 'api-gateway'
+
+// backend-legacy는 참고용으로만 유지 (Gradle Multi-Module에서 제외)

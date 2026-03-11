@@ -1,0 +1,68 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+
+  output:
+    ansi:
+      enabled: always
+
+  cloud:
+    gateway:
+      routes:
+        # Subway Service 라우팅
+        - id: subway-service
+          uri: http://localhost:8081
+          predicates:
+            - Path=/api/subway/**
+          filters:
+            - RewritePath=/api/subway(?<segment>.*), /subway${segment}
+            - name: RequestLogging
+
+        # Weather Service 라우팅
+        - id: weather-service
+          uri: http://localhost:8082
+          predicates:
+            - Path=/api/weather,/api/weather/**
+          filters:
+            - RewritePath=/api/weather(?<segment>.*), /weather${segment}
+            - name: RequestLogging
+
+      # CORS 설정
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins:
+              - "http://localhost:5173"
+              - "http://localhost:3000"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - PATCH
+              - OPTIONS
+            allowedHeaders:
+              - "*"
+            allowCredentials: true
+            maxAge: 3600
+
+# Actuator 설정 (헬스체크)
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,gateway
+  endpoint:
+    health:
+      show-details: always
+
+logging:
+  level:
+    root: INFO
+    org.springframework.cloud.gateway: DEBUG
+    com.egojeogo: DEBUG
+  charset:
+    console: UTF-8

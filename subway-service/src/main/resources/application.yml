@@ -1,0 +1,50 @@
+server:
+  port: 8081
+  servlet:
+    context-path: /
+
+spring:
+  application:
+    name: subway-service
+
+  output:
+    ansi:
+      enabled: always
+
+  datasource:
+    url: jdbc:h2:file:./data/subway-db
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: sa
+
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+      settings:
+        web-allow-others: true
+
+  jpa:
+    open-in-view: false
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+
+logging:
+  level:
+    root: INFO
+    org.hibernate.SQL: DEBUG
+    org.hibernate.orm.jdbc.bind: TRACE
+    com.egojeogo: DEBUG
+  charset:
+    console: UTF-8
+
+# 서울시 지하철 실시간 도착 정보 API
+seoul:
+  subway:
+    api:
+      key: 746c7a476d7765673939446d64526b
+      url: http://swopenAPI.seoul.go.kr/api/subway
